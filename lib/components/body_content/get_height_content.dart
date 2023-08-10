@@ -33,6 +33,7 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
         (widget.util.getExpanded!() == false)) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
         widget.util.bodyAnimationController!.value = 1.0;
+        widget.util.headAnimationController!.value = 1.0;
         await widget.util.showBodyTemp!().then((i) {
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
             await widget.util.removeBodyTemp!().then((i) {

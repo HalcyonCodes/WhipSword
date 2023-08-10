@@ -22,7 +22,7 @@ class _UserBodyContentState extends State<UserBodyContent>
     super.initState();
     //实现动画控制器
     controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 600));
+        vsync: this, duration: const Duration(milliseconds: 500));
     animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: controller!,
         curve: const Interval(0, 1.0, curve: Curves.fastOutSlowIn)));

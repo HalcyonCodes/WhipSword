@@ -28,14 +28,12 @@ class _HeadAnimatedInterfaceState extends State<HeadAnimatedInterface>
     super.initState();
 
     animationController = widget.animationController;
-    widget.util.setFuncStartBodyAnimate(startAnimate);
-    widget.util.setFuncReverseBodyAnimte(reverseAnimate);
+    widget.util.setFuncStartHeadAnimate(startAnimate);
+    widget.util.setFuncReverseHeadAnimte(reverseAnimate);
     widget.util.setHeadAnimationController(widget.animationController);
     widget.util.setHeadAnimation(widget.animation);
     //实现折叠状态
-    (widget.util.getExpanding!() == false) && (widget.util.getExpanded!() == false)
-        ? widget.animationController.forward(from: 1.0)
-        : () {};
+
   }
 
   @override
@@ -44,15 +42,15 @@ class _HeadAnimatedInterfaceState extends State<HeadAnimatedInterface>
     return widget.child;
   }
 
-  Future<void> startAnimate(Function() func) async {
+  Future<void> startAnimate( Function() func) async {
       animationController.forward().then((value) {
         func();
       });
 
   }
 
-  Future<void> reverseAnimate(Function() func) async {
-      animationController.reverse().then((value) {
+  Future<void> reverseAnimate(double i,Function() func) async {
+      animationController.reverse(from: i).then((value) {
         func();
      });
 

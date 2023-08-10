@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+//import 'package:whip_sword/components/body_content/user_widget_content.dart';
+import 'package:whip_sword/components/head_content/user_widget_content.dart';
 import 'package:whip_sword/components/whip_sword/whip_sword.dart';
-import './whip_sword.dart';
+import 'package:whip_sword/util.dart';
+//import './whip_sword.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -33,11 +35,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- 
+  Util util = Util();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -46,73 +47,115 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         alignment: Alignment.topCenter,
         child: ListView(
-          children: 
-           [
-              
-              WhipSword(
-                isExpanded: false,
-                headBottomMargin: 24,
-                head: Container(
-                  color: Colors.green,
-                  height: 40,
-                  width: 607,
-                ),
-                body: Column(
+          children: [
+            WhipSword(
+              isExpanded: false,
+              headBottomMargin: 24,
+              /*head: Container(
+                color: Colors.green,
+                height: 40,
+                width: 607,
+              ),*/
+              userHead: UserHeadContent(util: util, child: Container(
+                color: Colors.green,
+                height: 40,
+                width: 607,
+              ),),
+              body: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                    Container(
+                      height: 46,
+                      width: 600,
+                      color: Colors.blue,
+                      margin: const EdgeInsets.only(bottom: 24),
                       child: Text('test'),
                     ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                    Container(
+                      height: 46,
+                      width: 600,
+                      color: Colors.blue,
+                      margin: const EdgeInsets.only(bottom: 24),
                       child: Text('test'),
                     ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                    Container(
+                      height: 46,
+                      width: 600,
+                      color: Colors.blue,
+                      margin: const EdgeInsets.only(bottom: 24),
                       child: Text('test'),
                     ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                    Container(
+                      height: 46,
+                      width: 600,
+                      color: Colors.blue,
+                      margin: const EdgeInsets.only(bottom: 24),
                       child: Text('test'),
                     ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                    Container(
+                      height: 46,
+                      width: 600,
+                      color: Colors.blue,
+                      margin: const EdgeInsets.only(bottom: 24),
                       child: Text('test'),
                     ),
                   ]
-                ),
-              ),
-             WhipSword(
-                headBottomMargin: 24,
-                head: Container(
-                  color: Colors.green,
-                  height: 40,
-                  width: 600,
-                ),
-                body: Column(
-                  children: [
-                     Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
-                      child: Text('test'),
-                    ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
-                      child: Text('test'),
-                    ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
-                      child: Text('test'),
-                    ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
-                      child: Text('test'),
-                    ),
-                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
-                      child: Text('test'),
-                    ),
-                  ],
-                ),
-              ),
-              
-              
-            ],
-          ),
-        ),
+                  
+                  ),
+            ),
       
-     
+        
+            WhipSword(
+              headBottomMargin: 24,
+              head: Container(
+                color: Colors.green,
+                height: 40,
+                width: 600,
+              ),
+              body: Column(
+                children: [
+                  Container(
+                    height: 46,
+                    width: 600,
+                    color: Colors.blue,
+                    margin: const EdgeInsets.only(bottom: 24),
+                    child: Text('test'),
+                  ),
+                  Container(
+                    height: 46,
+                    width: 600,
+                    color: Colors.blue,
+                    margin: const EdgeInsets.only(bottom: 24),
+                    child: Text('test'),
+                  ),
+                  Container(
+                    height: 46,
+                    width: 600,
+                    color: Colors.blue,
+                    margin: const EdgeInsets.only(bottom: 24),
+                    child: Text('test'),
+                  ),
+                  Container(
+                    height: 46,
+                    width: 600,
+                    color: Colors.blue,
+                    margin: const EdgeInsets.only(bottom: 24),
+                    child: Text('test'),
+                  ),
+                  Container(
+                    height: 46,
+                    width: 600,
+                    color: Colors.blue,
+                    margin: const EdgeInsets.only(bottom: 24),
+                    child: Text('test'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

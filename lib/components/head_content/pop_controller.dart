@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whip_sword/components/head_content/user_widget_content.dart';
 import '../../util.dart';
 
 class PopController extends StatefulWidget {
@@ -32,7 +33,7 @@ class _PopControllerState extends State<PopController> {
       child: InkWell(
         onTap: onTap,
         borderRadius: widget.borderRadius,
-        child: widget.widget,
+        child: UserHeadContent(util: widget.util, child: widget.widget),
       ),
     );
   }
@@ -51,6 +52,7 @@ class _PopControllerState extends State<PopController> {
                   await widget.util.removeBodyTemp!().then((i) {
                     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                       widget.util.startBodyAnimate!(() {});
+                      widget.util.startHeadAnimate!(() {});
                     });
                   });
                 });
@@ -62,7 +64,10 @@ class _PopControllerState extends State<PopController> {
             widget.util.changeExpanding!(true);
             widget.util.changeExpanded!(true);
             widget.util.bodyAnimationController!.stop();
-            await widget.util.reverseBodyAnimate!(
+            widget.util.headAnimationController!.stop();
+            widget.util.reverseHeadAnimate!(
+                widget.util.headAnimationController!.value, () {});
+            widget.util.reverseBodyAnimate!(
                 widget.util.bodyAnimationController!.value, () {
               widget.util.changeExpanding!(false);
             });

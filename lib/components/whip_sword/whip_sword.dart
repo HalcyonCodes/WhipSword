@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../body_animated_interface.dart';
-import '../../head_animated_interface.dart';
+
 import '../../util.dart';
 import '../head_content/head_content.dart';
 import '../body_content/body_content.dart';
@@ -8,22 +7,20 @@ import '../body_content/body_content.dart';
 class WhipSword extends StatefulWidget {
   final Widget? body;
   final Widget? head;
-  final BodyAnimatedInterface? bodyAnimatedWidget;
-  final HeadAnimatedInterface? headAnimatedWidget;
+  final Widget? userHead;
+  final Util? util;
   final BorderRadius? headBorderRadius;
   final bool? isExpanded;
-  final Util? util;
   final double headBottomMargin;
 
   const WhipSword(
       {super.key,
       required this.body,
-      required this.head,
-      this.bodyAnimatedWidget,
-      this.headAnimatedWidget,
+      this.util,
+      this.head,
+      this.userHead,
       this.headBorderRadius,
       this.isExpanded,
-      this.util,
       required this.headBottomMargin});
 
   @override
@@ -71,14 +68,14 @@ class _WhipSwordState extends State<WhipSword> {
           headBottomMargin: widget.headBottomMargin,
           borderRadius: widget.headBorderRadius,
           util: util!,
-          userHead: widget.headAnimatedWidget,
+          userHead: widget.userHead,
           child: widget.head,
         ),
         isExpanded == true
             ? const SizedBox()
             : BodyContent(
                 util: util!,
-                userBody: widget.bodyAnimatedWidget,
+                userBody: null,
                 child: widget.body,
               )
       ],

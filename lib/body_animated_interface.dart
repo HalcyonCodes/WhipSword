@@ -31,11 +31,7 @@ class _BodyAnimatedInterfaceState extends State<BodyAnimatedInterface>
     widget.util.setFuncReverseBodyAnimte(reverseAnimate);
     widget.util.setBodyAnimationController(widget.animationController);
     widget.util.setBodyAnimation(widget.animation);
-    //实现折叠状态
-    //(widget.util.getExpanding!() == false) && (widget.util.getExpanded!() == false)
-    ///   ? widget.animationController.forward(from: 1.0)
-    //   : () {};
-    //widget.animationController.forward(from: 1.0);
+
   }
 
   @override
@@ -45,21 +41,16 @@ class _BodyAnimatedInterfaceState extends State<BodyAnimatedInterface>
   }
 
   Future<void> startAnimate(Function() func) async {
-    //if (animationController.status != AnimationStatus.completed) {
-      //refreshUi();
       animationController.forward().then((value) {
         func();
       });
-    //}
+
   }
 
   Future<void> reverseAnimate( double d,Function() func) async {
-   // if (animationController.status == AnimationStatus.completed) {
-      //refreshUi();
        animationController.reverse(from: d).then((value) {
         func();
      });
-   // }
   }
 
 
