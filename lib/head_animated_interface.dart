@@ -5,53 +5,57 @@ import 'util.dart';
 class HeadAnimatedInterface extends StatefulWidget {
   final Util util;
   final AnimationController animationController;
-  final Widget widget;
+  final Widget child;
+  final Animation animation;
   const HeadAnimatedInterface(
       {super.key,
       required this.util,
       required this.animationController,
-      required this.widget});
+      required this.child,
+      required this.animation,
+      });
 
   @override
-  State<HeadAnimatedInterface> createState() =>
-      _HeadAnimatedInterfaceState();
+  State<HeadAnimatedInterface> createState() => _HeadAnimatedInterfaceState();
 }
 
 class _HeadAnimatedInterfaceState extends State<HeadAnimatedInterface>
     with AutomaticKeepAliveClientMixin {
-
   late AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
+
     animationController = widget.animationController;
-    widget.util.setFuncStartHeadAnimate(startAnimate);
-    widget.util.setFuncReverseHeadAnimte(reverseAnimate);
+    widget.util.setFuncStartBodyAnimate(startAnimate);
+    widget.util.setFuncReverseBodyAnimte(reverseAnimate);
+    widget.util.setHeadAnimationController(widget.animationController);
+    widget.util.setHeadAnimation(widget.animation);
+    //实现折叠状态
+    (widget.util.getExpanding!() == false) && (widget.util.getExpanded!() == false)
+        ? widget.animationController.forward(from: 1.0)
+        : () {};
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return widget.widget;
+    return widget.child;
   }
 
   Future<void> startAnimate(Function() func) async {
-    if (animationController.status != AnimationStatus.completed) {
-      refreshUi();
-      await animationController.forward().then((value) {
+      animationController.forward().then((value) {
         func();
       });
-    }
+
   }
 
   Future<void> reverseAnimate(Function() func) async {
-    if (animationController.status == AnimationStatus.completed) {
-      refreshUi();
-      await animationController.reverse().then((value) {
+      animationController.reverse().then((value) {
         func();
-      });
-    }
+     });
+
   }
 
   void refreshUi() {

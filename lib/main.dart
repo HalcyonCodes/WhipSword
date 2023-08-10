@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whip_sword/components/whip_sword/whip_sword.dart';
+import './whip_sword.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,13 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -47,27 +43,76 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-       
-        child: Column(
-         
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: Container(
+        alignment: Alignment.topCenter,
+        child: ListView(
+          children: 
+           [
+              
+              WhipSword(
+                isExpanded: false,
+                headBottomMargin: 24,
+                head: Container(
+                  color: Colors.green,
+                  height: 40,
+                  width: 607,
+                ),
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                  ]
+                ),
+              ),
+             WhipSword(
+                headBottomMargin: 24,
+                head: Container(
+                  color: Colors.green,
+                  height: 40,
+                  width: 600,
+                ),
+                body: Column(
+                  children: [
+                     Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                    Container(height: 46, width: 600,color: Colors.blue,margin: const EdgeInsets.only(bottom: 24),
+                      child: Text('test'),
+                    ),
+                  ],
+                ),
+              ),
+              
+              
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
+      
+     
     );
   }
 }

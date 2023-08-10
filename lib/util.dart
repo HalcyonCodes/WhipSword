@@ -15,6 +15,7 @@ class Util {
     _reverseBodyAnimate = func;
   }
 
+  
   //head弹出动画
   Function? _startHeadAnimate;
   Function? get startHeadAnimate => _startHeadAnimate;
@@ -50,20 +51,86 @@ class Util {
     _removeBodyTemp = func;
   }
 
-  //animation
-  Animation<double>? _animation;
-  Animation<double>? get animation => _animation;
-  void setAnimation(Animation<double>? a) {
-    _animation = a;
+  //body的animation
+  Animation? _bodyAnimation;
+  Animation? get bodyAnimation => _bodyAnimation;
+  void setBodyAnimation(Animation? a) {
+    _bodyAnimation = a;
   }
 
-  //animatedController
-  AnimationController? _animationController;
-  AnimationController? get animationController => _animationController;
-  void setAnimationController(AnimationController? a) {
-    _animationController = a;
+
+  //body的animatedController
+  AnimationController? _bodyAnimationController;
+  AnimationController? get bodyAnimationController => _bodyAnimationController;
+  void setBodyAnimationController(AnimationController? a) {
+    _bodyAnimationController = a;
   }
 
-  //
+  //head的animation
+  Animation? _headAnimation;
+  Animation? get headAnimation => _headAnimation;
+  void setHeadAnimation(Animation? a) {
+    _headAnimation = a;
+  }
+
+
+  //head的animatedController
+  AnimationController? _headAnimationController;
+  AnimationController? get headAnimationController => _headAnimationController;
+  void setHeadAnimationController(AnimationController? a) {
+    _headAnimationController = a;
+  }
+  
+
+
+  //修改已经折叠标志
+  Function? _changeExpanded;
+  Function? get changeExpanded => _changeExpanded;
+  void setFuncChangeExpanded(Function? func) {
+    _changeExpanded = func;
+  }
+
+  //修改折叠状态是否在折叠中
+  Function? _changeExpanding;
+  Function? get changeExpanding => _changeExpanding;
+  void setFuncChangeExpanding(Function? func) {
+    _changeExpanding = func;
+  }
+
+  //获得折叠状态是否在折叠中
+  Function? _getExpanding;
+  Function? get getExpanding => _getExpanding;
+  void setFuncGetExpanding(Function? func) {
+    _getExpanding = func;
+  }
+
+  //获得折叠状态
+  Function? _getExpanded;
+  Function? get getExpanded => _getExpanded;
+  void setFuncGetExpanded(Function? func) {
+    _getExpanded = func;
+  }
+  
+
+  //刷新最顶层
+  Function? _refreshWhipSword;
+  Function? get refreshWhipSword => _refreshWhipSword;
+  void setFuncRefreshWhipSword(Function? func) {
+    _refreshWhipSword = func;
+  }
+
+  //获得初始化状态
+  Function? _getInit;
+  Function? get getInit => _getInit;
+  void setFuncGetInit(Function? func) {
+    _getInit = func;
+  }
+
+    //获得初始化状态
+  Function? _setInit;
+  Function? get setInit => _setInit;
+  void setFuncSetInit(Function? func) {
+    _setInit = func;
+  }
 
 }

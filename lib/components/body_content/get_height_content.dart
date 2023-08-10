@@ -7,7 +7,9 @@ import './temp_content.dart';
 class GetBodyHeight extends StatefulWidget {
   final Util util;
   final Widget widget;
-  const GetBodyHeight({super.key, required this.util, required this.widget});
+  final Widget? tempWidget;
+  const GetBodyHeight(
+      {super.key, required this.util, required this.widget, this.tempWidget});
 
   @override
   State<GetBodyHeight> createState() => _GetBodyHeightState();
@@ -25,6 +27,22 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
     //注册
     widget.util.setFuncShowBodyTemp(showBodyTemp);
     widget.util.setFuncRemoveBodyTemp(removeBodyTemp);
+
+    //初始化body高度
+    if ((widget.util.getInit!() == false) &&
+        (widget.util.getExpanded!() == false)) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+        widget.util.bodyAnimationController!.value = 1.0;
+        await widget.util.showBodyTemp!().then((i) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+            await widget.util.removeBodyTemp!().then((i) {
+              widget.util.setInit!(true);
+              widget.util.refreshWhipSword!();
+            });
+          });
+        });
+      });
+    }
   }
 
   @override
@@ -36,17 +54,17 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
     setState(() {});
   }
 
-  void showBodyTemp() {
+  Future<void> showBodyTemp() async {
     Overlay.of(context).insert(_overlayEntry!);
   }
 
-  void removeBodyTemp() {
+  Future<void> removeBodyTemp() async {
     _overlayEntry?.remove();
   }
 
   OverlayEntry overlayEntry() {
     return OverlayEntry(builder: (context) {
-      return WidgetTemp(util: widget.util, widget: widget.widget);
+      return WidgetTemp(util: widget.util, widget: widget.tempWidget!);
     });
   }
 }

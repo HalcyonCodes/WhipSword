@@ -14,23 +14,19 @@ class WidgetTemp extends StatefulWidget {
 }
 
 class _WidgetTempState extends State<WidgetTemp> with TickerProviderStateMixin {
+  final GlobalKey _myKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, boxConstraints) {
-      //获得高度
-      widget.util.setBodyHeight(boxConstraints.maxHeight);
-      final Tween<double> tween = Tween(begin: 0, end: 0);
-      return FadeTransition(
-          opacity: tween.animate(
-        CurvedAnimation(
-          parent: AnimationController(
-            duration: const Duration(seconds: 0),
-            vsync: this,
-          ),
-          curve: Curves.linear, // 使用线性插值器以获取匀速动画
-        )),
-        child: Transform(
-            transform: Matrix4.translationValues(0, 0, 0.0), child: widget),
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        //获得高度
+        widget.util.setBodyHeight(_myKey.currentContext!.size!.height);
+      });
+      return Container(
+        alignment: Alignment.center,
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Opacity(key: _myKey, opacity: 0.0, child: widget.widget),
+        ]),
       );
     });
   }

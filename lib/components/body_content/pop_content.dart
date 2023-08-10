@@ -17,8 +17,6 @@ class PopContent extends StatefulWidget {
 }
 
 class _PopContentState extends State<PopContent> {
-
-
   @override
   void initState() {
     super.initState();
@@ -27,12 +25,43 @@ class _PopContentState extends State<PopContent> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: widget.util.animation!,
+      animation: widget.util.bodyAnimation!,
       builder: (context, child) {
-        return SizedBox(
-            height: widget.util.bodyHeight * (widget.util.animation!.value),
-            child: widget.widget);
+        return widget.util.getInit!() == true
+            ? SizedBox(
+                height:
+                    widget.util.bodyHeight * (widget.util.bodyAnimation!.value),
+                child: ClipPath(
+                  clipper: RectangleClipper(height: widget.util.bodyHeight * (widget.util.bodyAnimation!.value) ),
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context)
+                        .copyWith(scrollbars: false),
+                    child: SingleChildScrollView(
+                      clipBehavior: Clip.none,
+                      child: widget.widget,
+                    ),
+                  ),
+                ))
+            : const SizedBox();
       },
     );
+  }
+}
+
+class RectangleClipper extends CustomClipper<Path> {
+  final double height;
+
+  const RectangleClipper({required this.height});
+
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.addRect(Rect.fromLTRB(-500, 0, 1920, height));
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }
