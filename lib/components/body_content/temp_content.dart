@@ -23,10 +23,13 @@ class _WidgetTempState extends State<WidgetTemp> with TickerProviderStateMixin {
         widget.util.setBodyHeight(_myKey.currentContext!.size!.height);
       });
       return Container(
+        height: MediaQuery.of(context).size.height,
         alignment: Alignment.center,
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Opacity(key: _myKey, opacity: 0.0, child: widget.widget),
-        ]),
+        child: SingleChildScrollView(
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Opacity(key: _myKey, opacity: 0.0, child: widget.widget),
+          ]),
+        ),
       );
     });
   }

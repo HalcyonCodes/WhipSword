@@ -65,7 +65,11 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
 
   OverlayEntry overlayEntry() {
     return OverlayEntry(builder: (context) {
-      return WidgetTemp(util: widget.util, widget: widget.tempWidget!);
+      return Opacity(
+        opacity: 0.0,
+        child: Scaffold(
+            body: WidgetTemp(util: widget.util, widget: widget.tempWidget!)),
+      );
     });
   }
 }
