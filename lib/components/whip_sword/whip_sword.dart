@@ -12,16 +12,19 @@ class WhipSword extends StatefulWidget {
   final BorderRadius? headBorderRadius;
   final bool? isExpanded;
   final double headBottomMargin;
+  final CrossAxisAlignment? crossAxisAlignment;
 
-  const WhipSword(
-      {super.key,
-      required this.body,
-      this.util,
-      this.head,
-      this.userHead,
-      this.headBorderRadius,
-      this.isExpanded,
-      required this.headBottomMargin});
+  const WhipSword({
+    super.key,
+    required this.body,
+    this.util,
+    this.head,
+    this.userHead,
+    this.headBorderRadius,
+    this.isExpanded,
+    required this.headBottomMargin,
+    this.crossAxisAlignment,
+  });
 
   @override
   State<WhipSword> createState() => _WhipSwordState();
@@ -39,6 +42,8 @@ class _WhipSwordState extends State<WhipSword> {
   //初始化
   bool? isInit;
 
+  CrossAxisAlignment? crossAxisAlignment;
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +51,7 @@ class _WhipSwordState extends State<WhipSword> {
     isExpanding = false;
     util = widget.util ?? Util();
     isInit = false;
+    crossAxisAlignment = widget.crossAxisAlignment ?? CrossAxisAlignment.start;
 
     //注册
     util!.setFuncChangeExpanded(changeExpanded);
@@ -61,7 +67,7 @@ class _WhipSwordState extends State<WhipSword> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment!,
       mainAxisSize: MainAxisSize.min,
       children: [
         HeadContent(
