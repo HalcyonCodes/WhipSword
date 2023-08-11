@@ -15,7 +15,6 @@ class Util {
     _reverseBodyAnimate = func;
   }
 
-  
   //head弹出动画
   Function? _startHeadAnimate;
   Function? get startHeadAnimate => _startHeadAnimate;
@@ -58,7 +57,6 @@ class Util {
     _bodyAnimation = a;
   }
 
-
   //body的animatedController
   AnimationController? _bodyAnimationController;
   AnimationController? get bodyAnimationController => _bodyAnimationController;
@@ -73,15 +71,12 @@ class Util {
     _headAnimation = a;
   }
 
-
   //head的animatedController
   AnimationController? _headAnimationController;
   AnimationController? get headAnimationController => _headAnimationController;
   void setHeadAnimationController(AnimationController? a) {
     _headAnimationController = a;
   }
-  
-
 
   //修改已经折叠标志
   Function? _changeExpanded;
@@ -110,7 +105,6 @@ class Util {
   void setFuncGetExpanded(Function? func) {
     _getExpanded = func;
   }
-  
 
   //刷新最顶层
   Function? _refreshWhipSword;
@@ -126,11 +120,17 @@ class Util {
     _getInit = func;
   }
 
-    //获得初始化状态
+  //获得初始化状态
   Function? _setInit;
   Function? get setInit => _setInit;
   void setFuncSetInit(Function? func) {
     _setInit = func;
   }
 
+  //当自定义head有其他点击方法时调用
+  Function? _headOnTap;
+  Function? get headOnTap => _headOnTap;
+  void setFuncHeadOnTap(Function? func) {
+    _headOnTap = func;
+  }
 }

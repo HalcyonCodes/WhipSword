@@ -7,13 +7,15 @@ class HeadAnimatedInterface extends StatefulWidget {
   final AnimationController animationController;
   final Widget child;
   final Animation animation;
-  const HeadAnimatedInterface(
-      {super.key,
-      required this.util,
-      required this.animationController,
-      required this.child,
-      required this.animation,
-      });
+  final Function? onTap;
+  const HeadAnimatedInterface({
+    super.key,
+    required this.util,
+    required this.animationController,
+    required this.child,
+    required this.animation,
+    this.onTap,
+  });
 
   @override
   State<HeadAnimatedInterface> createState() => _HeadAnimatedInterfaceState();
@@ -32,8 +34,8 @@ class _HeadAnimatedInterfaceState extends State<HeadAnimatedInterface>
     widget.util.setFuncReverseHeadAnimte(reverseAnimate);
     widget.util.setHeadAnimationController(widget.animationController);
     widget.util.setHeadAnimation(widget.animation);
+    widget.util.setFuncHeadOnTap(widget.onTap);
     //实现折叠状态
-
   }
 
   @override
@@ -42,18 +44,16 @@ class _HeadAnimatedInterfaceState extends State<HeadAnimatedInterface>
     return widget.child;
   }
 
-  Future<void> startAnimate( Function() func) async {
-      animationController.forward().then((value) {
-        func();
-      });
-
+  Future<void> startAnimate(Function() func) async {
+    animationController.forward().then((value) {
+      func();
+    });
   }
 
-  Future<void> reverseAnimate(double i,Function() func) async {
-      animationController.reverse(from: i).then((value) {
-        func();
-     });
-
+  Future<void> reverseAnimate(double i, Function() func) async {
+    animationController.reverse(from: i).then((value) {
+      func();
+    });
   }
 
   void refreshUi() {

@@ -39,6 +39,9 @@ class _PopControllerState extends State<PopController> {
   }
 
   void onTap() {
+    //执行外部方法
+    widget.util.headOnTap != null ? widget.util.headOnTap!() : () {};
+
     widget.util.getExpanded!() == true
         ? (() async {
             //原始状态是折叠状态
