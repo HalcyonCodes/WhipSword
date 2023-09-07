@@ -133,4 +133,14 @@ class Util {
   void setFuncHeadOnTap(Function? func) {
     _headOnTap = func;
   }
+
+  //刷新body高度
+  Function? _refreshBodyHeight;
+  Function? get refreshBodyHeight => _refreshBodyHeight;
+  void setFuncRefreshBodyHeight(Function? func) {
+    _refreshBodyHeight = func;
+  }
+
+ 
+ 
 }

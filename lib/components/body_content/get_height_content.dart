@@ -27,6 +27,7 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
     //注册
     widget.util.setFuncShowBodyTemp(showBodyTemp);
     widget.util.setFuncRemoveBodyTemp(removeBodyTemp);
+    widget.util.setFuncRefreshBodyHeight(refreshHeight);
 
     //初始化body高度
     if ((widget.util.getInit!() == false) &&
@@ -70,6 +71,17 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
         child: Scaffold(
             body: WidgetTemp(util: widget.util, widget: widget.tempWidget!)),
       );
+    });
+  }
+
+  void refreshHeight() async {
+    await widget.util.showBodyTemp!().then((i) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+        await widget.util.removeBodyTemp!().then((i) {
+          widget.util.setInit!(true);
+          widget.util.refreshWhipSword!();
+        });
+      });
     });
   }
 }
