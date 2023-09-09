@@ -31,6 +31,7 @@ class _UserBodyContentState extends State<UserBodyContent>
   @override
   Widget build(BuildContext context) {
     return BodyAnimatedInterface(
+      
         animationController: controller!,
         animation: animation!,
         util: widget.util!,

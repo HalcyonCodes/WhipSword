@@ -80,6 +80,7 @@ class _WhipSwordState extends State<WhipSword> {
         isExpanded == true
             ? const SizedBox()
             : BodyContent(
+              
                 util: util!,
                 userBody: null,
                 child: widget.body,

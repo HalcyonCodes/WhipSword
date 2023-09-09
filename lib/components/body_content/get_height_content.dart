@@ -16,13 +16,15 @@ class GetBodyHeight extends StatefulWidget {
 }
 
 class _GetBodyHeightState extends State<GetBodyHeight> {
-  OverlayEntry? _overlayEntry;
+  OverlayEntry? overlayEntry;
+
+  Widget? tempWidget;
 
   @override
   void initState() {
     super.initState();
     //初始化
-    _overlayEntry = overlayEntry();
+    overlayEntry = dOverlayEntry();
 
     //注册
     widget.util.setFuncShowBodyTemp(showBodyTemp);
@@ -49,6 +51,7 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
 
   @override
   Widget build(BuildContext context) {
+    tempWidget = widget.tempWidget;
     return widget.widget;
   }
 
@@ -57,31 +60,37 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
   }
 
   Future<void> showBodyTemp() async {
-    Overlay.of(context).insert(_overlayEntry!);
+    Overlay.of(context).insert(overlayEntry!);
   }
 
   Future<void> removeBodyTemp() async {
-    _overlayEntry?.remove();
+    overlayEntry?.remove();
   }
 
-  OverlayEntry overlayEntry() {
+  OverlayEntry dOverlayEntry() {
     return OverlayEntry(builder: (context) {
       return Opacity(
         opacity: 0.0,
-        child: Scaffold(
-            body: WidgetTemp(util: widget.util, widget: widget.tempWidget!)),
+        child:
+            Scaffold(body: WidgetTemp(util: widget.util, widget: tempWidget!)),
       );
     });
   }
 
   void refreshHeight() async {
-    await widget.util.showBodyTemp!().then((i) {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-        await widget.util.removeBodyTemp!().then((i) {
-          widget.util.setInit!(true);
-          widget.util.refreshWhipSword!();
+    await widget.util.refreshWhipSword!();
+    //这里由于refresh在构建的时候build默认是在本函数执行完成之后再执行build的，无法获得组件的最新状态
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      overlayEntry = dOverlayEntry();
+      await showBodyTemp().then((i) {
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+          await removeBodyTemp().then((i) {
+            widget.util.setInit!(true);
+            widget.util.refreshWhipSword!();
+          });
         });
       });
     });
+    
   }
 }
