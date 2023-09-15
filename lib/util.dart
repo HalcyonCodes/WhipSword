@@ -136,7 +136,7 @@ class Util {
 
   //刷新body高度
   Function? _refreshBodyHeight;
-  Function? get refreshBodyHeight => _refreshBodyHeight;
+  Function? get refreshBodyHeight => _refreshBodyHeight ;
   void setFuncRefreshBodyHeight(Function? func) {
     _refreshBodyHeight = func;
   }

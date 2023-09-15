@@ -78,7 +78,8 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
   }
 
   void refreshHeight() async {
-    await widget.util.refreshWhipSword!();
+    if(widget.util.getExpanded!() == false){
+      await widget.util.refreshWhipSword!();
     //这里由于refresh在构建的时候build默认是在本函数执行完成之后再执行build的，无法获得组件的最新状态
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       overlayEntry = dOverlayEntry();
@@ -91,6 +92,9 @@ class _GetBodyHeightState extends State<GetBodyHeight> {
         });
       });
     });
+
+    }
+    
     
   }
 }

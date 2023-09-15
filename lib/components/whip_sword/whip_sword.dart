@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../util.dart';
 import '../head_content/head_content.dart';
 import '../body_content/body_content.dart';
+import '../body_content/expanded_siazed_box.dart';
 
 class WhipSword extends StatefulWidget {
   final Widget? body;
@@ -78,7 +79,7 @@ class _WhipSwordState extends State<WhipSword> {
           child: widget.head,
         ),
         isExpanded == true
-            ? const SizedBox()
+            ? ExpandedSizedBox(util: util!)
             : BodyContent(
               
                 util: util!,
